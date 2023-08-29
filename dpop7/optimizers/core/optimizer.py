@@ -112,6 +112,7 @@ class Optimizer(ABC):
         self.fitness = None  # to save generated fitnesses
 
     def _evaluate_fitness(self, x, args=None):
+        """Only for serial fitness evaluation."""
         self.start_function_evaluations = time.time()
         if args is None:
             y = self.fitness_function(x)
@@ -119,13 +120,14 @@ class Optimizer(ABC):
             y = self.fitness_function(x, args=args)
         self.time_function_evaluations += time.time() - self.start_function_evaluations
         self.n_function_evaluations += 1
-        # update best-so-far solution (x) and fitness (y)
+        # update best-so-far solution (`x`) and fitness (`y`)
         if y < self.best_so_far_y:
             self.best_so_far_x, self.best_so_far_y = np.copy(x), y
-        return float(y)
+        return float(y)  # for simplicity
 
     def _check_terminations(self):
-        self.runtime = time.time() - self.start_time
+        """Check termination conditions."""
+        self.runtime = time.time() - self.start_time  # actually used runtime
         if self.n_function_evaluations >= self.max_function_evaluations:
             termination_signal = True, Terminations.MAX_FUNCTION_EVALUATIONS
         elif self.runtime >= self.max_runtime:
@@ -138,51 +140,61 @@ class Optimizer(ABC):
         return termination_signal[0]
 
     def _compress_fitness(self, fitness):
+        """Compress fitness data in a predefined frequency `saving_fitness`."""
         fitness = np.array(fitness)
-        # arrange in non-increasing order
-        for i in range(len(fitness) - 1):
+        for i in range(len(fitness) - 1):  # arrange in non-increasing order
             if fitness[i] < fitness[i + 1]:
                 fitness[i + 1] = fitness[i]
-        if self.saving_fitness == 1:
-            self.fitness = np.stack((np.arange(1, len(fitness) + 1), fitness), 1)
-        elif self.saving_fitness > 1:
+        if self.saving_fitness == 1:  # to save all fitnesses generated during evolution
+            self.fitness = np.stack((np.arange(len(fitness)) + 1, fitness), 1)
+        elif self.saving_fitness > 1:  # to first sample then save
             # use 1-based index
             index = np.arange(1, len(fitness), self.saving_fitness)
             # recover 0-based index via - 1
             index = np.append(index, len(fitness)) - 1
             self.fitness = np.stack((index, fitness[index]), 1)
-            # recover 1-based index
+            # recover 1-based index for convergence data
             self.fitness[0, 0], self.fitness[-1, 0] = 1, len(fitness)
 
     def _check_success(self):
+        """Check the final state (success/True or failure/False) of the best-so-far
+            solution/fitness according to two conditions:
+            1. Whether the best-so-far solution is out of the search range or not,
+            2. Whether the best-so-far solution or fitness includes NaN or not.
+        """
         if (self.upper_boundary is not None) and (self.lower_boundary is not None) and (
-                np.any(self.lower_boundary > self.best_so_far_x) or np.any(self.best_so_far_x > self.upper_boundary)):
+                np.any(self.lower_boundary > self.best_so_far_x) or
+                np.any(self.best_so_far_x > self.upper_boundary)):
             return False
         elif np.isnan(self.best_so_far_y) or np.any(np.isnan(self.best_so_far_x)):
             return False
         return True
 
     def _collect(self, fitness):
-        if self.saving_fitness:
+        """Collect final states shared by all optimizer classes."""
+        if self.saving_fitness:  # to reduce fitness data for faster postprocessing
             self._compress_fitness(fitness[:self.n_function_evaluations])
-        return {'best_so_far_x': self.best_so_far_x,
-                'best_so_far_y': self.best_so_far_y,
+        return {'best_so_far_x': self.best_so_far_x,  # best-so-far solution found
+                'best_so_far_y': self.best_so_far_y,  # best-so-far fitness found
                 'n_function_evaluations': self.n_function_evaluations,
-                'runtime': time.time() - self.start_time,
+                'runtime': time.time() - self.start_time,  # actually used runtime
                 'termination_signal': self.termination_signal,
                 'time_function_evaluations': self.time_function_evaluations,
-                'fitness': self.fitness,
-                'success': self._check_success()}
+                'fitness': self.fitness,  # sampled fitnesses
+                'success': self._check_success()}  # flag to show the success state
 
     def initialize(self):
+        """Only for the initialization stage."""
         raise NotImplementedError
 
     def iterate(self):
+        """Only for the iteration stage."""
         raise NotImplementedError
 
     def optimize(self, fitness_function=None):
+        """For the entire optimization/evolution stage: initialization + iteration."""
         self.start_time = time.time()
         if fitness_function is not None:
             self.fitness_function = fitness_function
-        fitness = []  # to store all fitness generated during evolution/optimization
+        fitness = []  # to store fitness generated during evolution/optimization
         return fitness
