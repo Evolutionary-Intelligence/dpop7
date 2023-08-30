@@ -3,6 +3,7 @@ import time  # for timing
 from enum import IntEnum  # for termination conditions
 
 import numpy as np  # engine for numerical computing
+import ray  # engine for distributed computing
 
 
 class Terminations(IntEnum):  # for termination conditions
@@ -198,3 +199,20 @@ class Optimizer(ABC):
             self.fitness_function = fitness_function
         fitness = []  # to store fitness generated during evolution/optimization
         return fitness
+
+
+@ray.remote
+def parallelize_evaluations(f, x, args=None):
+    """Parallelize all function/fitness evaluations based on Ray's Tasks:
+        https://docs.ray.io/en/latest/ray-core/tasks.html
+
+        Each individual uses only one CPU core under the following env settings:
+        $ export MKL_NUM_THREADS=1
+        $ export NUMEXPR_NUM_THREADS=1
+        $ export OMP_NUM_THREADS=1
+        https://stackoverflow.com/questions/30791550/limit-number-of-threads-in-numpy
+    """
+    y = []
+    for i in range(x.shape[0]):
+        y.append(f.remote(x[i], args))
+    return ray.get(y)
