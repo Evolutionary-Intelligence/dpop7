@@ -1,5 +1,5 @@
-from dpop7.optimizers.core.optimizer import Terminations
-from dpop7.optimizers.core.optimizer import Optimizer
+from dpop7.optimizers.core.distributed_optimizer import Terminations
+from dpop7.optimizers.core.distributed_optimizer import DistributedOptimizer
 
 
 __all__ = [Terminations, DistributedOptimizer]
