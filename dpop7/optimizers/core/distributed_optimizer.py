@@ -15,8 +15,8 @@ class Terminations(IntEnum):  # for termination conditions
     #  (when the best-so-far fitness is below it, the optimizer will stop)
 
 
-class Optimizer(ABC):
-    """Base (abstract) class of all optimizers for continuous black-box **minimization**.
+class DistributedOptimizer(ABC):
+    """Base (abstract) class of all distributed optimizers for continuous black-box **minimization**.
 
     References
     ----------
@@ -25,11 +25,6 @@ class Optimizer(ABC):
     MIT Press.
     https://algorithmsbook.com/optimization/
     (See Chapter 7: Direct Methods for details.)
-
-    Nesterov, Y., 2018.
-    Lectures on convex optimization.
-    Berlin: Springer International Publishing.
-    https://link.springer.com/book/10.1007/978-3-319-91578-4
 
     Nesterov, Y. and Spokoiny, V., 2017.
     Random gradient-free minimization of convex functions.
