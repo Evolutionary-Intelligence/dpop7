@@ -62,7 +62,7 @@ class DPRS(DRS):
             assert self.sigma is not None
 
     def _sample(self, rng):
-        """Helper function for random sampling only for initialization."""
+        """Helper function to random sampling only for initialization."""
         if self._sampling_type == 0:
             x = self.x + self.sigma*rng.standard_normal(size=(self.ndim_problem,))
         else:
