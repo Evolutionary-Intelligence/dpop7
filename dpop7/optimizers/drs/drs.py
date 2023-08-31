@@ -3,7 +3,7 @@ import numpy as np  # engine for numerical computing
 
 # abstract class of all distributed optimizers
 from dpop7.optimizers.core.distributed_optimizer import DistributedOptimizer as DO
-from dpop7.optimizers.core.distributed_optimizer import parallelize_evaluations
+from dpop7.optimizers.core.distributed_optimizer import parallelize_evaluations as p_e
 
 
 class DRS(DO):
@@ -144,8 +144,7 @@ class DRS(DO):
             self._print_verbose_info(fitness, y)
             x = self.iterate()  # to sample new parallel points
             self.start_function_evaluations = time.time()
-            y = parallelize_evaluations.remote(
-                self.fitness_function, x, args)  # to evaluate these parallel points
+            y = p_e.remote(self.fitness_function, x, args)  # to evaluate these parallel points
             self.time_function_evaluations += time.time() - self.start_function_evaluations
             self.n_function_evaluations += len(y)
             # update best-so-far solution and fitness
