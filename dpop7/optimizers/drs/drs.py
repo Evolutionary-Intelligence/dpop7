@@ -138,16 +138,14 @@ class DRS(DO):
     def optimize(self, fitness_function=None, args=None):
         """For the entire optimization/evolution stage: initialization + iteration."""
         fitness = DO.optimize(self, fitness_function)
-        x = self.initialize()  # (single) starting point
-        y = self._evaluate_fitness(x, args)  # fitness of starting point
         while not self._check_terminations():
-            self._print_verbose_info(fitness, y)
             x = self.iterate()  # to sample new parallel points
             self.start_function_evaluations = time.time()
-            y = p_e.remote(self.fitness_function, x, args)  # to evaluate these parallel points
+            y = p_e(self.fitness_function, x, args)  # to evaluate these parallel points
             self.time_function_evaluations += time.time() - self.start_function_evaluations
             self.n_function_evaluations += len(y)
             # update best-so-far solution and fitness
+            self._print_verbose_info(fitness, y)
             i = np.argmin(y)
             if y[i] < self.best_so_far_y:
                 self.best_so_far_x, self.best_so_far_y = np.copy(x[i]), y[i]
