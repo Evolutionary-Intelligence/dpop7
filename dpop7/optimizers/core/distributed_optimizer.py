@@ -196,7 +196,6 @@ class DistributedOptimizer(ABC):
         return fitness
 
 
-@ray.remote
 def parallelize_evaluations(f, x, args=None):
     """Parallelize all function/fitness evaluations based on Ray's Tasks:
         https://docs.ray.io/en/latest/ray-core/tasks.html
@@ -209,5 +208,8 @@ def parallelize_evaluations(f, x, args=None):
     """
     y = []
     for i in range(x.shape[0]):
-        y.append(f.remote(x[i], args))
+        if args is None:
+            y.append(f.remote(x[i]))
+        else:
+            y.append(f.remote(x[i], args))
     return ray.get(y)
