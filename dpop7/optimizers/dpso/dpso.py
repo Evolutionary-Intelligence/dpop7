@@ -118,6 +118,7 @@ class DPSO(DO):
         DO.__init__(self, problem, options)
         if self.n_individuals is None:  # swarm (population) size, aka parallel number of particles
             self.n_individuals = 20
+        assert self.n_individuals > 0
         self.cognition = options.get('cognition', 2.0)  # cognitive learning rate
         assert self.cognition >= 0.0
         self.society = options.get('society', 2.0)  # social learning rate
