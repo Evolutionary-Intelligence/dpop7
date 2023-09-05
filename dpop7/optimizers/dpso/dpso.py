@@ -182,7 +182,7 @@ class DPSO(DO):
         """For the entire optimization/evolution stage: initialization + iteration."""
         fitness = DO.optimize(self, fitness_function)
         v, x, y, p_x, p_y, n_x = self.initialize(args)
-        while not self.termination_signal:
+        while not self._check_terminations():
             self._print_verbose_info(fitness, y)
             v, x, y, p_x, p_y, n_x = self.iterate(v, x, y, p_x, p_y, n_x, args)
         return self._collect(fitness, y)
