@@ -111,8 +111,8 @@ class DCDE(DDE):
         self.time_function_evaluations += time.time() - self.start_function_evaluations
         self.n_function_evaluations += len(y)
         i = np.argmin(y)
-        if y[i] < self.best_so_far_y:
-            self.best_so_far_x, self.best_so_far_y = np.copy(x[i]), y[i]
+        if yy[i] < self.best_so_far_y:
+            self.best_so_far_x, self.best_so_far_y = np.copy(x[i]), yy[i]
         for i in range(self.n_individuals):
             if yy[i] < y[i]:
                 x[i], y[i] = v[i], yy[i]
