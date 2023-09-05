@@ -99,6 +99,6 @@ class DDE(DO):
     def _collect(self, fitness=None, y=None):
         """Collect final states shared by all `DDE` classes."""
         self._print_verbose_info(fitness, y)
-        results = DDE._collect(self, fitness)
+        results = DO._collect(self, fitness)
         results['_n_generations'] = self._n_generations
         return results
