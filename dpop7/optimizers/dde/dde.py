@@ -55,7 +55,7 @@ class DDE(DO):
     """
     def __init__(self, problem, options):
         """Initialize the class with two inputs (problem arguments and optimizer options)."""
-        DDE.__init__(self, problem, options)
+        DO.__init__(self, problem, options)
         if self.n_individuals is None:  # number of parallel offspring, aka offspring population size
             self.n_individuals = 100
         assert self.n_individuals > 0
