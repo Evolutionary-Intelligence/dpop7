@@ -21,10 +21,10 @@ class DDE(DO):
                 * 'lower_boundary'   - lower boundary of search range (`array_like`).
     options : dict
               optimizer options with the following common settings (`keys`):
+                * 'n_individuals'            - number of parallel offspring (`int`, default: `100`),
                 * 'max_function_evaluations' - maximum of function evaluations (`int`, default: `np.Inf`),
                 * 'max_runtime'              - maximal runtime to be allowed (`float`, default: `np.Inf`),
-                * 'seed_rng'                 - seed for random number generation needed to be *explicitly* set (`int`),
-                * 'n_individuals'            - number of parallel offspring (`int`, default: `100`).
+                * 'seed_rng'                 - seed for random number generation needed to be *explicitly* set (`int`).
 
     Attributes
     ----------
@@ -80,7 +80,7 @@ class DDE(DO):
         raise NotImplementedError
 
     def _print_verbose_info(self, fitness, y, is_print=False):
-        """Print verbose information with a predefined frequency."""
+        """Print verbose information with a predefined frequency for logging."""
         if y is not None and self.saving_fitness:
             if not np.isscalar(y):
                 fitness.extend(y)
@@ -97,7 +97,7 @@ class DDE(DO):
                 self._printed_evaluations = self.n_function_evaluations
 
     def _collect(self, fitness=None, y=None):
-        """Collect final states shared by all `DDE` classes."""
+        """Collect final optimization states shared by all `DDE` classes."""
         self._print_verbose_info(fitness, y)
         results = DO._collect(self, fitness)
         results['_n_generations'] = self._n_generations
