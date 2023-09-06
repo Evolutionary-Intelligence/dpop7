@@ -171,7 +171,7 @@ class DPSO(DO):
             print(info.format(self._n_generations, self.best_so_far_y, np.min(y), self.n_function_evaluations))
 
     def _collect(self, fitness, y=None):
-        """Collect final states shared by all `DPSO` classes."""
+        """Collect final optimization states shared by all `DPSO` classes."""
         if y is not None:
             self._print_verbose_info(fitness, y)
         results = DO._collect(self, fitness)
