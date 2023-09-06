@@ -102,6 +102,7 @@ class DRS(DO):
     def __init__(self, problem, options):
         """Initialize the class with two inputs (problem arguments and optimizer options)."""
         DO.__init__(self, problem, options)
+        assert self.n_individuals > 0
         self._n_generations = 0  # number of generations
 
     def initialize(self):
