@@ -11,7 +11,7 @@ class DRS(DO):
 
     This is the **base** class for all `DRS` classes. Please use any of its instantiated
     subclasses to optimize the black-box problem at hand on CPU-based distributed computing
-    platforms. Recently, all of its state-of-the-art versions adopt the *population-based*
+    platforms. Recently, all of its *state-of-the-art* versions adopt the *population-based*
     random sampling strategy for better exploration in *complex* search spaces.
 
     Parameters
