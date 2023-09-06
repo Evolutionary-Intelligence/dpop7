@@ -100,4 +100,8 @@ class DSPSO(DPSO):
             if y[i] < p_y[i]:
                 p_x[i], p_y[i] = x[i], y[i]
         self._n_generations += 1
+        # update best-so-far solution and fitness
+        i = np.argmin(y)
+        if y[i] < self.best_so_far_y:
+            self.best_so_far_x, self.best_so_far_y = np.copy(x[i]), y[i]
         return v, x, y, p_x, p_y, n_x
