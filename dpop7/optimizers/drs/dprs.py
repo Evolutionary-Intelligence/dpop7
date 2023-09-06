@@ -52,31 +52,11 @@ class DPRS(DRS):
     def __init__(self, problem, options):
         """Initialize the class with two inputs (problem arguments and optimizer options)."""
         DRS.__init__(self, problem, options)
-        # set as default: 1 -> uniformly distributed random sampling (only for initialization)
-        self._sampling_type = options.get('_sampling_type', 1)
-        if self._sampling_type not in [0, 1]:  # 0 -> normally distributed random sampling
-            info = 'Support uniform (1) or normal (0) random sampling (only for initialization).'
-            raise ValueError(info.format(self.__class__.__name__))
-        elif self._sampling_type == 0:
-            self.sigma = options.get('sigma')  # initial global step-size (only for initialization)
-            assert self.sigma is not None
 
-    def _sample(self, rng):
-        """Helper function to random sampling only for initialization."""
-        if self._sampling_type == 0:
-            x = self.x + self.sigma*rng.standard_normal(size=(self.ndim_problem,))
-        else:
-            x = rng.uniform(self.initial_lower_boundary, self.initial_upper_boundary)
-        return x
-
-    def initialize(self):
+    def initialize(self):  # population-based sampling
         """Only for the initialization stage."""
-        if self.x is None:
-            x = self._sample(self.rng_initialization)
-        else:
-            x = np.copy(self.x)
-        assert len(x) == self.ndim_problem
-        return x
+        return self.rng_optimization.uniform(self.lower_boundary, self.upper_boundary,
+                                             size=(self.n_individuals, self.ndim_problem))
 
     def iterate(self):  # population-based sampling
         """Only for the iteration stage."""
