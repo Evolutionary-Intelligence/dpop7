@@ -32,9 +32,10 @@ class DPRS(DRS):
     .. code-block:: python
        :linenos:
 
+       >>> import ray
        >>> import numpy
        >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
-       >>> from pypop7.optimizers.rs.prs import PRS
+       >>> from dpop7.optimizers.drs.dprs import DPRS
        >>> @ray.remote
        ... def f(x):  # for parallel function evaluations
        ...     return rosenbrock(x)
