@@ -81,10 +81,11 @@ class DCDE(DDE):
         y = p_e(self.fitness_function, x, args)  # to evaluate these parallel points
         self.time_function_evaluations += time.time() - self.start_function_evaluations
         self.n_function_evaluations += len(y)
+        v = np.empty((self.n_individuals, self.ndim_problem))  # for mutation
+        # update best-so-far solution and fitness
         i = np.argmin(y)
         if y[i] < self.best_so_far_y:
             self.best_so_far_x, self.best_so_far_y = np.copy(x[i]), y[i]
-        v = np.empty((self.n_individuals, self.ndim_problem))  # for mutation
         return x, y, v
 
     def mutate(self, x=None, v=None):
