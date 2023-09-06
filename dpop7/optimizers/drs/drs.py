@@ -102,7 +102,6 @@ class DRS(DO):
     def __init__(self, problem, options):
         """Initialize the class with two inputs (problem arguments and optimizer options)."""
         DO.__init__(self, problem, options)
-        self.x = options.get('x')  # initial (starting) point
         self._n_generations = 0  # number of generations
 
     def initialize(self):
