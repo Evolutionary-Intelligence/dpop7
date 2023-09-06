@@ -113,7 +113,7 @@ class DRS(DO):
         raise NotImplementedError
 
     def _print_verbose_info(self, fitness, y):
-        """Print verbose information with a predefined frequency."""
+        """Print verbose information with a predefined frequency for logging."""
         if self.saving_fitness:
             if not np.isscalar(y):
                 fitness.extend(y)
