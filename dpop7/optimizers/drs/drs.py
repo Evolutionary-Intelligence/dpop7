@@ -142,9 +142,9 @@ class DRS(DO):
             self.time_function_evaluations += time.time() - self.start_function_evaluations
             self.n_function_evaluations += len(y)
             # update best-so-far solution and fitness
-            self._print_verbose_info(fitness, y)
             i = np.argmin(y)
             if y[i] < self.best_so_far_y:
                 self.best_so_far_x, self.best_so_far_y = np.copy(x[i]), y[i]
+            self._print_verbose_info(fitness, y)
             self._n_generations += 1
         return self._collect(fitness, y)
