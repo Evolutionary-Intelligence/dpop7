@@ -1,7 +1,7 @@
 import time
 import numpy as np  # engine for numerical computing
 
-# base class of Distributed Differential Evolution and Ray-based parallel fitness evaluations
+# base class for Distributed Differential Evolution and Ray-based parallel fitness evaluations
 from dpop7.optimizers.dde.dde import DDE
 from dpop7.optimizers.core.distributed_optimizer import parallelize_evaluations as p_e
 
