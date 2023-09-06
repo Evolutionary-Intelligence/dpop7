@@ -32,6 +32,25 @@ class DPRS(DRS):
     .. code-block:: python
        :linenos:
 
+       >>> import numpy
+       >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
+       >>> from pypop7.optimizers.rs.prs import PRS
+       >>> @ray.remote
+       ... def f(x):  # for parallel function evaluations
+       ...     return rosenbrock(x)
+       >>> problem = {'fitness_function': f,  # define problem arguments
+       ...            'ndim_problem': 2,
+       ...            'lower_boundary': -5*numpy.ones((2,)),
+       ...            'upper_boundary': 5*numpy.ones((2,))}
+       >>> options = {'max_function_evaluations': 5000,  # set optimizer options
+       ...            'seed_rng': 2022,  # seed for random number generation
+       ...            'n_individuals': 4}  # number of parallel samples to be evaluated
+       >>> dprs = DPRS(problem, options)  # initialize the optimizer class
+       >>> results = dprs.optimize()  # run the parallel optimization process
+       >>> # return the number of used function evaluations and found best-so-far fitness
+       >>> print(f"DPRS: {results['n_function_evaluations']}, {results['best_so_far_y']}")
+       DPRS: 5000, 0.11497678820610932
+
     References
     ----------
     Bergstra, J. and Bengio, Y., 2012.
