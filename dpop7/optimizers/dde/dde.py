@@ -1,6 +1,6 @@
 import numpy as np  # engine for numerical computing
 
-# abstract class of all distributed optimizers and Ray-based parallel fitness evaluations
+# abstract class of all distributed optimizers
 from dpop7.optimizers.core.distributed_optimizer import DistributedOptimizer as DO
 
 
