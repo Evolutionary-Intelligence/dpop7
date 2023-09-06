@@ -13,16 +13,16 @@ class DCDE(DDE):
     ----------
     problem : `dict`
               problem arguments with the following common settings (`keys`):
-                * 'fitness_function' - objective function to be **minimized** (`func`),
+                * 'fitness_function' - objective/cost function to be **minimized** (`func`),
                 * 'ndim_problem'     - number of dimensionality (`int`),
                 * 'upper_boundary'   - upper boundary of search range (`array_like`),
                 * 'lower_boundary'   - lower boundary of search range (`array_like`).
     options : `dict`
               optimizer options with the following common settings (`keys`):
+                * 'n_individuals'            - number of parallel offspring (`int`, default: `100`),
                 * 'max_function_evaluations' - maximum of function evaluations (`int`, default: `np.Inf`),
                 * 'max_runtime'              - maximal runtime to be allowed (`float`, default: `np.Inf`),
-                * 'seed_rng'                 - seed for random number generation (RNG) needed to be *explicitly* set (`int`),
-                * 'n_individuals'            - number of parallel offspring (`int`, default: `100`);
+                * 'seed_rng'                 - seed for random number generation (RNG) needed to be *explicitly* set (`int`);
               and with the following particular settings (`keys`):
                 * 'f'  - mutation factor (`float`, default: `0.5`),
                 * 'cr' - crossover probability (`float`, default: `0.9`).
