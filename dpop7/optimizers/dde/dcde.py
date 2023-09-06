@@ -111,12 +111,13 @@ class DCDE(DDE):
         yy = p_e(self.fitness_function, v, args)  # to evaluate these parallel points
         self.time_function_evaluations += time.time() - self.start_function_evaluations
         self.n_function_evaluations += len(y)
-        i = np.argmin(y)
-        if yy[i] < self.best_so_far_y:
-            self.best_so_far_x, self.best_so_far_y = np.copy(x[i]), yy[i]
         for i in range(self.n_individuals):
             if yy[i] < y[i]:
                 x[i], y[i] = v[i], yy[i]
+        # update best-so-far solution and fitness
+        i = np.argmin(y)
+        if yy[i] < self.best_so_far_y:
+            self.best_so_far_x, self.best_so_far_y = np.copy(x[i]), yy[i]
         return x, y
 
     def iterate(self, x=None, y=None, v=None, args=None):
