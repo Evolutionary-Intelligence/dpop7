@@ -15,7 +15,7 @@ class DDE(DO):
     ----------
     problem : dict
               problem arguments with the following common settings (`keys`):
-                * 'fitness_function' - objective function to be **minimized** (`func`),
+                * 'fitness_function' - objective/cost function to be **minimized** (`func`),
                 * 'ndim_problem'     - number of dimensionality (`int`),
                 * 'upper_boundary'   - upper boundary of search range (`array_like`),
                 * 'lower_boundary'   - lower boundary of search range (`array_like`).
