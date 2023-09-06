@@ -24,9 +24,9 @@ class DSPSO(DPSO):
                 * 'max_runtime'              - maximal runtime to be allowed (`float`, default: `np.Inf`),
                 * 'seed_rng'                 - seed for random number generation needed to be *explicitly* set (`int`);
               and with the following particular settings (`keys`):
-                * 'cognition'     - cognitive learning rate (`float`, default: `2.0`),
-                * 'society'       - social learning rate (`float`, default: `2.0`),
-                * 'max_ratio_v'   - maximal ratio of velocities w.r.t. search range (`float`, default: `0.2`).
+                * 'cognition'   - cognitive learning rate (`float`, default: `2.0`),
+                * 'society'     - social learning rate (`float`, default: `2.0`),
+                * 'max_ratio_v' - maximal ratio of velocities w.r.t. search range (`float`, default: `0.2`).
 
     Examples
     --------
