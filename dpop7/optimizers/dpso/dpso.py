@@ -39,7 +39,7 @@ class DPSO(DO):
     max_ratio_v   : `float`
                     maximal ratio of velocities w.r.t. search range.
     n_individuals : `int`
-                    swarm (population) size, aka parallel number of particles.
+                    swarm (population) size, aka number of parallel particles.
     society       : `float`
                     social learning rate, aka acceleration coefficient.
 
@@ -116,7 +116,7 @@ class DPSO(DO):
     def __init__(self, problem, options):
         """Initialize the class with two inputs (problem arguments and optimizer options)."""
         DO.__init__(self, problem, options)
-        if self.n_individuals is None:  # swarm (population) size, aka parallel number of particles
+        if self.n_individuals is None:  # swarm (population) size, aka number of parallel particles
             self.n_individuals = 20
         assert self.n_individuals > 0
         self.cognition = options.get('cognition', 2.0)  # cognitive learning rate
