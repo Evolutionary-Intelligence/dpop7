@@ -43,7 +43,7 @@ class DSPSO(DPSO):
     max_ratio_v   : `float`
                     maximal ratio of velocities w.r.t. search range.
     n_individuals : `int`
-                    swarm (population) size, aka parallel number of particles.
+                    swarm (population) size, aka number of parallel particles.
     society       : `float`
                     social learning rate, aka acceleration coefficient.
 
