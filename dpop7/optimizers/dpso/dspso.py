@@ -36,6 +36,25 @@ class DSPSO(DPSO):
     .. code-block:: python
        :linenos:
 
+       >>> import ray
+       >>> import numpy
+       >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
+       >>> from dpop7.optimizers.dpso.dspso import DSPSO
+       >>> @ray.remote
+       ... def f(x):  # for parallel function evaluations
+       ...     return rosenbrock(x)
+       >>> problem = {'fitness_function': f,  # define problem arguments
+       ...            'ndim_problem': 2,
+       ...            'lower_boundary': -5*numpy.ones((2,)),
+       ...            'upper_boundary': 5*numpy.ones((2,))}
+       >>> options = {'max_function_evaluations': 5000,  # set optimizer options
+       ...            'seed_rng': 2022}  # seed for random number generation
+       >>> dspso = DSPSO(problem, options)  # initialize the optimizer class
+       >>> results = dspso.optimize()  # run the parallel optimization process
+       >>> # return the number of used function evaluations and found best-so-far fitness
+       >>> print(f"DSPSO: {results['n_function_evaluations']}, {results['best_so_far_y']}")
+       DSPSO: 5000, 4.158268519131019e-09
+
     Attributes
     ----------
     cognition     : `float`
