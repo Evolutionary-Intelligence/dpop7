@@ -1,7 +1,7 @@
 import time
 import numpy as np  # engine for numerical computing
 
-# abstract class of all distributed optimizers and Ray-based parallel fitness evaluations
+# base class of Distributed Particle Swarm Optimizer and Ray-based parallel fitness evaluations
 from dpop7.optimizers.dpso.dpso import DPSO
 from dpop7.optimizers.core.distributed_optimizer import parallelize_evaluations as p_e
 
