@@ -136,7 +136,7 @@ class DRS(DO):
         """For the entire optimization/evolution stage: initialization + iteration."""
         fitness = DO.optimize(self, fitness_function)
         while not self._check_terminations():
-            x = self.iterate()  # to sample new parallel points
+            x = self.iterate()  # to sample new points
             self.start_function_evaluations = time.time()
             y = p_e(self.fitness_function, x, args)  # to evaluate these parallel points
             self.time_function_evaluations += time.time() - self.start_function_evaluations
