@@ -24,7 +24,7 @@ class DRS(DO):
                 * 'lower_boundary'   - lower boundary of search range (`array_like`).
     options : dict
               optimizer options with the following common settings (`keys`):
-                * 'n_individuals'            - swarm (population) size, aka parallel number of particles (`int`),
+                * 'n_individuals'            - number of parallel samples/individuals of each iteration (`int`),
                 * 'max_function_evaluations' - maximum of function evaluations (`int`, default: `np.Inf`),
                 * 'max_runtime'              - maximal runtime to be allowed (`float`, default: `np.Inf`),
                 * 'seed_rng'                 - seed for random number generation needed to be *explicitly* set (`int`).
