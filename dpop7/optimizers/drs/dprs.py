@@ -6,8 +6,7 @@ from dpop7.optimizers.drs.drs import DRS  # base class for Distributed Random Se
 class DPRS(DRS):
     """Distributed Pure Random Search (DPRS).
 
-    .. note:: Here we include `DPRS` mainly for *benchmarking* purpose. As pointed out in
-       `Probabilistic Machine Learning <https://probml.github.io/pml-book/book2.html>`_,
+    .. note:: As pointed out in `Probabilistic Machine Learning <https://probml.github.io/pml-book/book2.html>`_,
        *"Pure Random Search should always be tried as a baseline"*.
 
     Parameters
