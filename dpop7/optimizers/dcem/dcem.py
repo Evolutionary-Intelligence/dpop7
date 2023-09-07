@@ -103,7 +103,7 @@ class DCEM(DO):
         self.sigma = options.get('sigma')  # global (overall) step-size
         assert self.sigma is not None and self.sigma > 0.0
         self._sigmas = self.sigma*np.ones((self.ndim_problem,))  # individual step-sizes
-        self._n_generations = 0
+        self._n_generations = 0  # counter for generations
         self._printed_evaluations = self.n_function_evaluations  # counter for logging
 
     def initialize(self):
