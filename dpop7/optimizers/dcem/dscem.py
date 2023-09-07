@@ -50,8 +50,8 @@ class DSCEM(DCEM):
        ...     return rosenbrock(x)
        >>> problem = {'fitness_function': f,  # define problem arguments
        ...            'ndim_problem': 100,
-       ...            'lower_boundary': -5*numpy.ones((100,)),
-       ...            'upper_boundary': 5*numpy.ones((100,))}
+       ...            'lower_boundary': -5.0*numpy.ones((100,)),
+       ...            'upper_boundary': 5.0*numpy.ones((100,))}
        >>> options = {'max_function_evaluations': 1000000,  # set optimizer options
        ...            'seed_rng': 2022,
        ...            'sigma': 0.3}  # the global step-size may need to be tuned for better performance
