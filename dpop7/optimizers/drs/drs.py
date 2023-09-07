@@ -115,7 +115,7 @@ class DRS(DO):
 
     def _print_verbose_info(self, fitness, y):
         """Print verbose information with a predefined frequency for logging."""
-        if self.saving_fitness:
+        if self.saving_fitness:  # to save all fitnesses
             if not np.isscalar(y):
                 fitness.extend(y)
             else:
