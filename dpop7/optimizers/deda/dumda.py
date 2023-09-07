@@ -39,6 +39,25 @@ class DUMDA(DEDA):
     .. code-block:: python
        :linenos:
 
+       >>> import ray
+       >>> import numpy
+       >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
+       >>> from dpop7.optimizers.deda.dumda import DUMDA
+       >>> @ray.remote
+       ... def f(x):  # for parallel function evaluations
+       ...     return rosenbrock(x)
+       >>> problem = {'fitness_function': f,  # define problem arguments
+       ...            'ndim_problem': 2,
+       ...            'lower_boundary': -5.0*numpy.ones((2,)),
+       ...            'upper_boundary': 5.0*numpy.ones((2,))}
+       >>> options = {'max_function_evaluations': 5000,  # set optimizer options
+       ...            'seed_rng': 2022}  # seed for random number generation
+       >>> dumda = DUMDA(problem, options)  # initialize the optimizer class
+       >>> results = dumda.optimize()  # run the parallel optimization process
+       >>> # return the number of used function evaluations and found best-so-far fitness
+       >>> print(f"DUMDA: {results['n_function_evaluations']}, {results['best_so_far_y']}")
+       DUMDA: 5000, 0.029323401402499186
+
     Attributes
     ----------
     n_individuals : `int`
