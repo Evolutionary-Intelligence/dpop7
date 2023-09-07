@@ -2,7 +2,7 @@ import time
 import numpy as np  # engine for numerical computing
 
 # base class for Distributed Cross-Entropy Method and Ray-based parallel fitness evaluations
-from pypop7.optimizers.dcem.dcem import DCEM
+from dpop7.optimizers.dcem.dcem import DCEM
 from dpop7.optimizers.core.distributed_optimizer import parallelize_evaluations as p_e
 
 
