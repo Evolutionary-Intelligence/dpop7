@@ -97,10 +97,12 @@ class DEDA(DO):
     def __init__(self, problem, options):
         """Initialize the class with two inputs (problem arguments and optimizer options)."""
         DO.__init__(self, problem, options)
-        if self.n_individuals is None:  # number of offspring, aka offspring population size
+        if self.n_individuals is None:  # number of parallel offspring, aka offspring population size
             self.n_individuals = 200
+        assert self.n_individuals > 0
         if self.n_parents is None:  # number of parents, aka parental population size
             self.n_parents = int(self.n_individuals/2)
+        assert self.n_parents > 0
         self._n_generations = 0  # counter of generations
         self._printed_evaluations = self.n_function_evaluations  # counter for logging
         self._n_restart = 0  # counter for restart
