@@ -81,7 +81,7 @@ class DDE(DO):
 
     def _print_verbose_info(self, fitness, y, is_print=False):
         """Print verbose information with a predefined frequency for logging."""
-        if y is not None and self.saving_fitness:
+        if y is not None and self.saving_fitness:  # to save all fitnesses
             if not np.isscalar(y):
                 fitness.extend(y)
             else:
