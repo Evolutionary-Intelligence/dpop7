@@ -124,7 +124,7 @@ class DSCEM(DCEM):
         """For the entire optimization/evolution stage: initialization + iteration."""
         fitness = DCEM.optimize(self, fitness_function)
         mean, x, y = self.initialize()
-        while self._check_terminations():
+        while not self._check_terminations():
             x, y = self.iterate(mean, x, y, args)
             self._print_verbose_info(fitness, y)
             self._n_generations += 1
