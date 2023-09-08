@@ -2,7 +2,7 @@ import time
 import numpy as np  # engine for numerical computing
 
 # base class for Distributed Evolution Strategies and Ray-based parallel fitness evaluations
-from pypop7.optimizers.des.des import DES
+from dpop7.optimizers.des.des import DES
 from dpop7.optimizers.core.distributed_optimizer import parallelize_evaluations as p_e
 
 
