@@ -63,7 +63,7 @@ class DSAES(DES):
        >>> results = dsaes.optimize()  # run the optimization process
        >>> # return the number of function evaluations and best-so-far fitness
        >>> print(f"DSAES: {results['n_function_evaluations']}, {results['best_so_far_y']}")
-       DSAES: 5000, 0.07968852575335955
+       DSAES: 5004, 0.07968852575335955
 
     Attributes
     ----------
