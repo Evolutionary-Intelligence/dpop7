@@ -19,7 +19,7 @@ class DES(DO):
        rate in many (*although not all*) cases. Recently, the **theoretical foundation** of
        its most representative (modern) version called **CMA-ES** has been well built on the
        `Information-Geometric Optimization (IGO) <https://www.jmlr.org/papers/v18/14-467.html>`_
-       framework via the interesting **invariance** principles (inspired by `NES
+       framework via the interesting and powerful **invariance** principles (inspired by `NES
        <https://jmlr.org/papers/v15/wierstra14a.html>`_).
 
        According to the `Nature 2015 <https://www.nature.com/articles/nature14544.>`_ review on
