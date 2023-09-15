@@ -39,10 +39,14 @@ class DG3PCX(DGA):
     .. code-block:: python
        :linenos:
 
+       >>> import ray
        >>> import numpy
        >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
+       >>> @ray.remote
+       ... def f(x):  # for parallel function evaluations
+       ...     return rosenbrock(x)
        >>> from dpop7.optimizers.dga.dg3pcx import DG3PCX
-       >>> problem = {'fitness_function': rosenbrock,  # define problem arguments
+       >>> problem = {'fitness_function': f,  # define problem arguments
        ...            'ndim_problem': 2,
        ...            'lower_boundary': -5*numpy.ones((2,)),
        ...            'upper_boundary': 5*numpy.ones((2,))}
