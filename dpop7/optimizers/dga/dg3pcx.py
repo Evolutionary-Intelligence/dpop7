@@ -133,14 +133,14 @@ class DG3PCX(DGA):
             orth = orth - (np.dot(orth, d)*d)/np.power(d_norm, 2)
             xx[i] = x[p] + self._std_pcx_1*self.rng_optimization.standard_normal()*d + orth
         self.start_function_evaluations = time.time()
-        yy = p_e(self.fitness_function, xx, args)  # to evaluate these parallel points
+        yy = np.array(p_e(self.fitness_function, xx, args))  # to evaluate these parallel points
         self.time_function_evaluations += time.time() - self.start_function_evaluations
         self.n_function_evaluations += len(yy)
         # update best-so-far solution and fitness
         i = np.argmin(yy)
         if yy[i] < self.best_so_far_y:
             self.best_so_far_x, self.best_so_far_y = np.copy(xx[i]), yy[i]
-        fitness.append(yy)
+        fitness.extend(yy)
         # (Step 3:) choose two parents at random from the population
         offsprings = self.rng_optimization.choice(self.n_individuals, size=2, replace=False)
         # (Step 4:) from a combined subpopulation of two chosen parents and created offspring, choose
