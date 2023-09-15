@@ -48,8 +48,8 @@ class DG3PCX(DGA):
        >>> from dpop7.optimizers.dga.dg3pcx import DG3PCX
        >>> problem = {'fitness_function': f,  # define problem arguments
        ...            'ndim_problem': 2,
-       ...            'lower_boundary': -5*numpy.ones((2,)),
-       ...            'upper_boundary': 5*numpy.ones((2,))}
+       ...            'lower_boundary': -5.0*numpy.ones((2,)),
+       ...            'upper_boundary': 5.0*numpy.ones((2,))}
        >>> options = {'max_function_evaluations': 5000,  # set optimizer options
        ...            'seed_rng': 2022}
        >>> dg3pcx = DG3PCX(problem, options)  # initialize the optimizer class
@@ -96,7 +96,7 @@ class DG3PCX(DGA):
         x = self.rng_initialization.uniform(self.initial_lower_boundary, self.initial_upper_boundary,
                                             size=(self.n_individuals, self.ndim_problem))  # population
         self.start_function_evaluations = time.time()
-        y = p_e(self.fitness_function, x, args)  # to evaluate these parallel points
+        y = np.array(p_e(self.fitness_function, x, args))  # to evaluate these parallel points
         self.time_function_evaluations += time.time() - self.start_function_evaluations
         self.n_function_evaluations += len(y)
         # update best-so-far solution and fitness
