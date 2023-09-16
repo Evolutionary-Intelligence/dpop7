@@ -51,7 +51,7 @@ class DCEP(DEP):
        ... def f(x):  # for parallel function evaluations
        ...     return rosenbrock(x)
        >>> from dpop7.optimizers.dep.dcep import DCEP
-       >>> problem = {'fitness_function': rosenbrock,  # define problem arguments
+       >>> problem = {'fitness_function': f,  # define problem arguments
        ...            'ndim_problem': 2,
        ...            'lower_boundary': -5.0*numpy.ones((2,)),
        ...            'upper_boundary': 5.0*numpy.ones((2,))}
