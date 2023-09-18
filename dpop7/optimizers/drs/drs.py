@@ -1,4 +1,5 @@
 import time
+
 import numpy as np  # engine for numerical computing
 
 # abstract class of all distributed optimizers and Ray-based parallel fitness evaluations
