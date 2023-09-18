@@ -19,7 +19,7 @@ class DPRS(DO):
         self.island_runtime = options.get('island_runtime')
         assert self.island_runtime > 0
         self.island_saving_fitness = options.get('island_saving_fitness', 100)
-        assert self.island_saving_fitness > 0
+        assert self.island_saving_fitness >= 0
         self._optimizer = PRS
 
     def optimize(self, fitness_function=None, args=None):  # for all iterations (generations)
