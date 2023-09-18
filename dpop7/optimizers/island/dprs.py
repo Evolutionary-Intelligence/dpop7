@@ -39,7 +39,7 @@ class DPRS(DO):
                 ray_optimizer.append(ray_base_optimizer.remote(self.problem, options[i]))
                 ray_results.append(ray_optimizer[i].optimize.remote(self.fitness_function, args))
             results = ray.get(ray_results)  # to synchronize (a time-consuming operation)
-            for i, r in enumerate(results):  # to run serially (clearly which should be light-weighted)
+            for r in results:  # to run serially (clearly which should be light-weighted)
                 if self.best_so_far_y > r['best_so_far_y']:  # to update best-so-far solution and fitness
                     self.best_so_far_x, self.best_so_far_y = r['best_so_far_x'], r['best_so_far_y']
                 fitness_start, fitness_end = np.copy(r['fitness'][0]), np.copy(r['fitness'][-1])
