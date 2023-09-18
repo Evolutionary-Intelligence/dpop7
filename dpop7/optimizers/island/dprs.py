@@ -20,7 +20,7 @@ class DPRS(DO):
         assert self.island_runtime > 0
         self.island_saving_fitness = options.get('island_saving_fitness', 100)
         assert self.island_saving_fitness >= 0
-        self._optimizer = PRS
+        self._optimizer = PRS  # class of Pure Random Search
 
     def optimize(self, fitness_function=None, args=None):  # for all iterations (generations)
         """For the entire optimization/evolution stage: initialization + iteration."""
