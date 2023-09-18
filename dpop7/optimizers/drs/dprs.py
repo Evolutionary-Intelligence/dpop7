@@ -26,14 +26,14 @@ class DPRS(DRS):
 
     Examples
     --------
-    Use the `DPRS` optimizer to minimize the well-known test function
+    Use the optimizer `DPRS` to minimize the well-known test function
     `Rosenbrock <http://en.wikipedia.org/wiki/Rosenbrock_function>`_:
 
     .. code-block:: python
        :linenos:
 
-       >>> import ray
-       >>> import numpy
+       >>> import ray  # engine for distributed computing
+       >>> import numpy  # engine for numerical computing
        >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
        >>> from dpop7.optimizers.drs.dprs import DPRS
        >>> @ray.remote
