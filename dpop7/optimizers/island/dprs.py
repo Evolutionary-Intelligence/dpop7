@@ -2,10 +2,10 @@ import time
 
 import ray  # engine for distributed computing
 import numpy as np  # engine for numerical computing
+from pypop7.optimizers.rs.prs import PRS  # Pure Random Search
 
 # abstract class of all distributed optimizers
 from dpop7.optimizers.core.distributed_optimizer import DistributedOptimizer as DO
-from pypop7.optimizers.rs.prs import PRS  # Pure Random Search
 
 
 class DPRS(DO):
