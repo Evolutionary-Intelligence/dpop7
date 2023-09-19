@@ -75,6 +75,7 @@ class DistributedOptimizer(ABC):
         self.problem_name = problem.get('problem_name')
         if (self.problem_name is None) and hasattr(self.fitness_function, '__name__'):
             self.problem_name = self.fitness_function.__name__
+        self.problem = problem
 
         # optimizer-related options (in `dict` form)
         self.max_function_evaluations = options.get('max_function_evaluations', np.Inf)
