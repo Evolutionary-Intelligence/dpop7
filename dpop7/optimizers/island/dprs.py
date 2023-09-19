@@ -63,8 +63,8 @@ class DPRS(DO):
         assert self.island_min_rt >= 0
         self.island_rt = options.get('island_rt', 60*3)  # maximal runtime of each island
         assert self.island_rt >= self.island_min_rt
-        self.island_saving_fitness = options.get('island_saving_fitness', 100)
-        assert self.island_saving_fitness >= 0
+        self.island_sf = options.get('island_sf', 100)
+        assert self.island_sf >= 0
         self.island_max_fe = options.get('island_max_fe', np.Inf)
         assert self.island_max_fe > 0
         self._optimizer = PRS  # class of Pure Random Search as the base of each island
@@ -84,7 +84,7 @@ class DPRS(DO):
                     'fitness_threshold': self.fitness_threshold,
                     'seed_rng': self.rng_optimization.integers(0, np.iinfo(np.int64).max),
                     'verbose': False,
-                    'saving_fitness': self.island_saving_fitness}
+                    'saving_fitness': self.island_sf}
                 ray_optimizers.append(ray_base_optimizer.remote(ray_problem, options[i]))
                 # run each optimizer *serially* inside each *parallel* island
                 ray_results.append(ray_optimizers[i].optimize.remote(self.fitness_function, args))
