@@ -72,10 +72,10 @@ class DistributedOptimizer(ABC):
         self.lower_boundary = problem.get('lower_boundary')
         self.initial_upper_boundary = problem.get('initial_upper_boundary', self.upper_boundary)
         self.initial_lower_boundary = problem.get('initial_lower_boundary', self.lower_boundary)
-        self.problem_name = problem.get('problem_name')
+        self.problem_name = problem.get('problem_name')  # for the postprocessing stage
         if (self.problem_name is None) and hasattr(self.fitness_function, '__name__'):
             self.problem_name = self.fitness_function.__name__
-        self.problem = problem
+        self.problem = problem  # to be shared across all computing nodes
 
         # optimizer-related options (in `dict` form)
         self.max_function_evaluations = options.get('max_function_evaluations', np.Inf)
