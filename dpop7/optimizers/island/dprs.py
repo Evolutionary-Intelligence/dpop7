@@ -46,10 +46,9 @@ class DPRS(DO):
        ...            'ndim_problem': 20,
        ...            'lower_boundary': -5.0*numpy.ones((20,)),
        ...            'upper_boundary': 5.0*numpy.ones((20,))}
-       >>> options = {'max_function_evaluations': 50000,  # set optimizer options
+       >>> options = {'max_runtime': 60*10,  # set optimizer options
        ...            'seed_rng': 2023,  # seed for random number generation
-       ...            'n_islands': 4,  # number of parallel islands
-       ...            'island_max_fe': 50}  # maximum of function evaluations of each island at each round
+       ...            'n_islands': 4}  # number of parallel islands
        >>> dprs = DPRS(problem, options)  # initialize the optimizer class
        >>> results = dprs.optimize()  # run the parallel optimization process
        >>> print(f"DPRS: {results['n_function_evaluations']}, {results['best_so_far_y']}")
@@ -77,11 +76,8 @@ class DPRS(DO):
         while not self._check_terminations():
             ray_optimizers, ray_results = [], []  # to store all optimizers and their optimization results
             for i in range(self.n_islands):  # to run each island in parallel (driven by engine of ray)
-                if self.island_max_fe is not np.Inf:
-                    max_function_evaluations = min(self.island_max_fe, (self.max_function_evaluations -
-                        self.n_function_evaluations - i*self.island_max_fe))
                 options[i] = {'max_runtime': self.island_runtime,
-                    'max_function_evaluations': max_function_evaluations,
+                    'max_function_evaluations': self.island_max_fe,
                     'fitness_threshold': self.fitness_threshold,
                     'seed_rng': self.rng_optimization.integers(0, np.iinfo(np.int64).max),
                     'verbose': False,
