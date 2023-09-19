@@ -79,7 +79,7 @@ class DPRS(DO):
             for i in range(self.n_islands):  # to run each island in parallel (driven by engine of ray)
                 if self.island_max_fe is not np.Inf:
                     max_function_evaluations = min(self.island_max_fe, (self.max_function_evaluations -
-                                                self.n_function_evaluations - i*self.island_max_fe))
+                        self.n_function_evaluations - i*self.island_max_fe))
                 options[i] = {'max_runtime': self.island_runtime,
                     'max_function_evaluations': max_function_evaluations,
                     'fitness_threshold': self.fitness_threshold,
