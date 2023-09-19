@@ -80,6 +80,7 @@ class DSCEM(DO):
                     'fitness_threshold': self.fitness_threshold,
                     'seed_rng': self.rng_optimization.integers(0, np.iinfo(np.int64).max),
                     'verbose': False,
+                    'sigma': np.mean((self.upper_boundary - self.lower_boundary)/3.0),
                     'saving_fitness': self.island_sf}
                 ray_optimizers.append(ray_base_optimizer.remote(ray_problem, options[i]))
                 # run each optimizer *serially* inside each *parallel* island
