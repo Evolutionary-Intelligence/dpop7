@@ -40,10 +40,7 @@ class DPRS(DO):
        >>> import numpy  # engine for numerical computing
        >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
        >>> from dpop7.optimizers.island.dprs import DPRS
-       >>> @ray.remote
-       ... def f(x):  # for parallel function evaluations
-       ...     return rosenbrock(x)
-       >>> problem = {'fitness_function': f,  # define problem arguments
+       >>> problem = {'fitness_function': rosenbrock,  # define problem arguments
        ...            'ndim_problem': 20,
        ...            'lower_boundary': -5.0*numpy.ones((20,)),
        ...            'upper_boundary': 5.0*numpy.ones((20,))}
