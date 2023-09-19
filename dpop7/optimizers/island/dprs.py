@@ -42,7 +42,6 @@ class DPRS(DO):
        >>> from dpop7.optimizers.island.dprs import DPRS
        >>> def f(x):  # for parallel function evaluations
        ...    return rosenbrock(x)
-       ...
        >>> problem = {'fitness_function': f,  # define problem arguments
        ...            'ndim_problem': 20,
        ...            'lower_boundary': -5.0*numpy.ones((20,)),
