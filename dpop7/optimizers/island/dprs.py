@@ -57,7 +57,7 @@ class DPRS(DO):
         """Initialize the class with two inputs (problem arguments and optimizer options)."""
         DO.__init__(self, problem, options)
         self.n_islands = options.get('n_islands')  # number of parallel islands
-        assert self.n_islands > 1
+        assert self.n_islands > 1, 'Please use *PyPop7* directly (without any parallelism costs).'
         # set maximal runtime (at the inner level) of each island at each round (at the outer level)
         self.island_min_runtime = options.get('island_runtime', 3)  # minimal runtime of each island (for stability)
         assert self.island_min_runtime >= 0
