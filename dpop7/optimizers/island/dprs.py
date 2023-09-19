@@ -24,8 +24,8 @@ class DPRS(DO):
 
     def optimize(self, fitness_function=None, args=None):  # for all iterations (generations)
         """For the entire optimization/evolution stage: initialization + iteration."""
-        super(DO, self).optimize(fitness_function)
-        fitness = []  # to store all fitness generated during search
+        fitness = DO.optimize(self, fitness_function)
+        ray_problem = ray.put(self.problem)  # to be shared across all nodes
         ray_base_optimizer = ray.remote(num_cpus=1)(self._optimizer)  # to be shared across all nodes
         options = [None]*self.n_islands  # for each island
         while not self._check_terminations():
@@ -36,7 +36,7 @@ class DPRS(DO):
                     'seed_rng': self.rng_optimization.integers(0, np.iinfo(np.int64).max),
                     'verbose': False,
                     'saving_fitness': self.island_saving_fitness}
-                ray_optimizer.append(ray_base_optimizer.remote(self.problem, options[i]))
+                ray_optimizer.append(ray_base_optimizer.remote(ray_problem, options[i]))
                 ray_results.append(ray_optimizer[i].optimize.remote(self.fitness_function, args))
             results = ray.get(ray_results)  # to synchronize (a time-consuming operation)
             for r in results:  # to run serially (clearly which should be light-weighted)
