@@ -59,10 +59,10 @@ class DPRS(DO):
         self.n_islands = options.get('n_islands')  # number of parallel islands
         assert self.n_islands > 1, 'Please use *PyPop7* directly (without any parallelism costs).'
         # set maximal runtime (at the inner level) of each island at each round (at the outer level)
-        self.island_min_runtime = options.get('island_runtime', 3)  # minimal runtime of each island (for stability)
+        self.island_min_rt = options.get('island_min_rt', 3)  # minimal runtime of each island (for stability)
         assert self.island_min_runtime >= 0
-        self.island_runtime = options.get('island_runtime', 60*3)  # maximal runtime of each island
-        assert self.island_runtime >= self.island_min_runtime
+        self.island_rt = options.get('island_rt', 60*3)  # maximal runtime of each island
+        assert self.island_rt >= self.island_min_runtime
         self.island_saving_fitness = options.get('island_saving_fitness', 100)
         assert self.island_saving_fitness >= 0
         self.island_max_fe = options.get('island_max_fe', np.Inf)
@@ -78,8 +78,8 @@ class DPRS(DO):
         while not self._check_terminations():
             ray_optimizers, ray_results = [], []  # to store all optimizers and their optimization results
             for i in range(self.n_islands):  # to run each island in parallel (driven by engine of ray)
-                max_runtime = min(self.max_runtime - (time.time() - self.start_time), self.island_runtime)
-                options[i] = {'max_runtime': max(max_runtime, self.island_min_runtime),
+                max_runtime = min(self.max_runtime - (time.time() - self.start_time), self.island_rt)
+                options[i] = {'max_runtime': max(max_runtime, self.island_min_rt),
                     'max_function_evaluations': self.island_max_fe,
                     'fitness_threshold': self.fitness_threshold,
                     'seed_rng': self.rng_optimization.integers(0, np.iinfo(np.int64).max),
