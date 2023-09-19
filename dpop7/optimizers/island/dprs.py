@@ -49,7 +49,7 @@ class DPRS(DO):
        >>> options = {'max_function_evaluations': 50000,  # set optimizer options
        ...            'seed_rng': 2023,  # seed for random number generation
        ...            'n_islands': 4,  # number of parallel islands
-       ...            'island_runtime': 5.0}  # runtime of each island at each round
+       ...            'island_max_fe': 50}  # maximum of function evaluations of each island at each round
        >>> dprs = DPRS(problem, options)  # initialize the optimizer class
        >>> results = dprs.optimize()  # run the parallel optimization process
        >>> print(f"DPRS: {results['n_function_evaluations']}, {results['best_so_far_y']}")
@@ -60,10 +60,12 @@ class DPRS(DO):
         self.n_islands = options.get('n_islands')  # number of parallel islands
         assert self.n_islands > 1
         # set maximal runtime (at the inner level) of each island at each round (at the outer level)
-        self.island_runtime = options.get('island_runtime')
+        self.island_runtime = options.get('island_runtime', 60*3)
         assert self.island_runtime > 0
         self.island_saving_fitness = options.get('island_saving_fitness', 100)
         assert self.island_saving_fitness >= 0
+        self.island_max_fe = options.get('island_max_fe', np.Inf)
+        assert self.island_max_fe > 0
         self._optimizer = PRS  # class of Pure Random Search as the base of each island
 
     def optimize(self, fitness_function=None, args=None):  # for all iterations (generations)
@@ -75,8 +77,11 @@ class DPRS(DO):
         while not self._check_terminations():
             ray_optimizers, ray_results = [], []  # to store all optimizers and their optimization results
             for i in range(self.n_islands):  # to run each island in parallel (driven by engine of ray)
+                if self.island_max_fe is not np.Inf:
+                    max_function_evaluations = (self.max_function_evaluations -
+                                                self.n_function_evaluations - i*self.island_max_fe)
                 options[i] = {'max_runtime': self.island_runtime,
-                    'max_function_evaluations': self.max_function_evaluations - self.n_function_evaluations,
+                    'max_function_evaluations': max_function_evaluations,
                     'fitness_threshold': self.fitness_threshold,
                     'seed_rng': self.rng_optimization.integers(0, np.iinfo(np.int64).max),
                     'verbose': False,
