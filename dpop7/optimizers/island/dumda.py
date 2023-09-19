@@ -10,7 +10,7 @@ from dpop7.optimizers.core.distributed_optimizer import DistributedOptimizer as 
 
 
 class DUMDA(DO):
-    """Distributed Standard Cross-Entropy Method (DSCEM).
+    """Distributed Univariate Marginal Distribution Algorithm (DUMDA).
 
     Parameters
     ----------
