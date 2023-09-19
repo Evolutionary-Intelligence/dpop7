@@ -127,7 +127,7 @@ class DistributedOptimizer(ABC):
         self.runtime = time.time() - self.start_time  # actually used runtime
         if self.n_function_evaluations >= self.max_function_evaluations:
             termination_signal = True, Terminations.MAX_FUNCTION_EVALUATIONS
-        elif self.runtime >= self.max_runtime:
+        elif self.runtime + 7 >= self.max_runtime:  # + 7 for *conservative* estimation of runtime
             termination_signal = True, Terminations.MAX_RUNTIME
         elif self.best_so_far_y <= self.fitness_threshold:
             termination_signal = True, Terminations.FITNESS_THRESHOLD
