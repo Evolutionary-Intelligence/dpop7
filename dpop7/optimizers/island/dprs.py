@@ -30,15 +30,15 @@ class DPRS(DO):
         ray_base_optimizer = ray.remote(num_cpus=1)(self._optimizer)  # to be shared across all nodes
         options = [None]*self.n_islands  # optimizer options for each island
         while not self._check_terminations():
-            ray_optimizer, ray_results = [], []
+            ray_optimizers, ray_results = [], []  # to store all optimizers and their optimization results
             for i in range(self.n_islands):  # to run each island in parallel (driven by engine of ray)
                 options[i] = {'max_runtime': self.island_runtime,
                     'fitness_threshold': self.fitness_threshold,
                     'seed_rng': self.rng_optimization.integers(0, np.iinfo(np.int64).max),
                     'verbose': False,
                     'saving_fitness': self.island_saving_fitness}
-                ray_optimizer.append(ray_base_optimizer.remote(ray_problem, options[i]))
-                ray_results.append(ray_optimizer[i].optimize.remote(self.fitness_function, args))
+                ray_optimizers.append(ray_base_optimizer.remote(ray_problem, options[i]))
+                ray_results.append(ray_optimizers[i].optimize.remote(self.fitness_function, args))
             results = ray.get(ray_results)  # to synchronize (a time-consuming operation)
             for r in results:  # to run serially (clearly which should be light-weighted)
                 if self.best_so_far_y > r['best_so_far_y']:  # to update best-so-far solution and fitness
