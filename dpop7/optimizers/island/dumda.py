@@ -28,7 +28,7 @@ class DUMDA(DO):
 
     Examples
     --------
-    Use the optimizer `DSCEM` to minimize the well-known test function
+    Use the optimizer `DUMDA` to minimize the well-known test function
     `Rosenbrock <http://en.wikipedia.org/wiki/Rosenbrock_function>`_:
 
     .. code-block:: python
@@ -37,7 +37,7 @@ class DUMDA(DO):
        >>> import ray  # engine for distributed computing
        >>> import numpy  # engine for numerical computing
        >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
-       >>> from dpop7.optimizers.island.dscem import DSCEM
+       >>> from dpop7.optimizers.island.dumda import DUMDA
        >>> problem = {'fitness_function': rosenbrock,  # define problem arguments
        ...            'ndim_problem': 20,
        ...            'lower_boundary': -5.0*numpy.ones((20,)),
