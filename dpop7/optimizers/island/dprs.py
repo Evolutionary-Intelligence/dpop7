@@ -14,13 +14,14 @@ class DPRS(DO):
     def __init__(self, problem, options):
         """Initialize the class with two inputs (problem arguments and optimizer options)."""
         DO.__init__(self, problem, options)
-        self.n_islands = options.get('n_islands')  # number of islands
+        self.n_islands = options.get('n_islands')  # number of parallel islands
         assert self.n_islands > 1
+        # set maximal runtime (at the inner level) of each island at each round (at the outer level)
         self.island_runtime = options.get('island_runtime')
         assert self.island_runtime > 0
         self.island_saving_fitness = options.get('island_saving_fitness', 100)
         assert self.island_saving_fitness >= 0
-        self._optimizer = PRS  # class of Pure Random Search
+        self._optimizer = PRS  # class of Pure Random Search as the base of each island
 
     def optimize(self, fitness_function=None, args=None):  # for all iterations (generations)
         """For the entire optimization/evolution stage: initialization + iteration."""
