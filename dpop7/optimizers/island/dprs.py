@@ -28,7 +28,7 @@ class DPRS(DO):
         fitness = DO.optimize(self, fitness_function)
         ray_problem = ray.put(self.problem)  # to be shared for all islands across all nodes
         ray_base_optimizer = ray.remote(num_cpus=1)(self._optimizer)  # to be shared across all nodes
-        options = [None]*self.n_islands  # for each island
+        options = [None]*self.n_islands  # optimizer options for each island
         while not self._check_terminations():
             ray_optimizer, ray_results = [], []
             for i in range(self.n_islands):  # to run each island in parallel (driven by engine of ray)
