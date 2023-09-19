@@ -38,6 +38,7 @@ class DPRS(DO):
                     'verbose': False,
                     'saving_fitness': self.island_saving_fitness}
                 ray_optimizers.append(ray_base_optimizer.remote(ray_problem, options[i]))
+                # run each optimizer *serially* inside each *parallel* island
                 ray_results.append(ray_optimizers[i].optimize.remote(self.fitness_function, args))
             results = ray.get(ray_results)  # to synchronize (a time-consuming operation)
             for r in results:  # to run serially (clearly which should be light-weighted)
