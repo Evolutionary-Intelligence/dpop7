@@ -60,9 +60,9 @@ class DPRS(DO):
         assert self.n_islands > 1, 'Please use *PyPop7* directly (without any parallelism costs).'
         # set maximal runtime (at the inner level) of each island at each round (at the outer level)
         self.island_min_rt = options.get('island_min_rt', 3)  # minimal runtime of each island (for stability)
-        assert self.island_min_runtime >= 0
+        assert self.island_min_rt >= 0
         self.island_rt = options.get('island_rt', 60*3)  # maximal runtime of each island
-        assert self.island_rt >= self.island_min_runtime
+        assert self.island_rt >= self.island_min_rt
         self.island_saving_fitness = options.get('island_saving_fitness', 100)
         assert self.island_saving_fitness >= 0
         self.island_max_fe = options.get('island_max_fe', np.Inf)
