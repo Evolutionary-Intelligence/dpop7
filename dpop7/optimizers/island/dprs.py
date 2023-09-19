@@ -10,6 +10,50 @@ from dpop7.optimizers.core.distributed_optimizer import DistributedOptimizer as 
 
 class DPRS(DO):
     """Distributed Pure Random Search (DPRS) based on the island model.
+
+    .. note:: As pointed out in `Probabilistic Machine Learning <https://probml.github.io/pml-book/book2.html>`_,
+       *"Pure Random Search should always be tried as a baseline"*.
+
+    Parameters
+    ----------
+    problem : dict
+              problem arguments with the following common settings (`keys`):
+                * 'fitness_function' - objective/cost function to be **minimized** (`func`),
+                * 'ndim_problem'     - number of dimensionality (`int`),
+                * 'upper_boundary'   - upper boundary of search range (`array_like`),
+                * 'lower_boundary'   - lower boundary of search range (`array_like`).
+    options : dict
+              optimizer options with the following common settings (`keys`):
+                * 'max_function_evaluations' - maximum of function evaluations (`int`, default: `np.Inf`),
+                * 'max_runtime'              - maximal runtime to be allowed (`float`, default: `np.Inf`),
+                * 'seed_rng'                 - seed for random number generation needed to be *explicitly* set (`int`).
+
+    Examples
+    --------
+    Use the optimizer `DPRS` to minimize the well-known test function
+    `Rosenbrock <http://en.wikipedia.org/wiki/Rosenbrock_function>`_:
+
+    .. code-block:: python
+       :linenos:
+
+       >>> import ray  # engine for distributed computing
+       >>> import numpy  # engine for numerical computing
+       >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
+       >>> from dpop7.optimizers.island.dprs import DPRS
+       >>> def f(x):  # for parallel function evaluations
+       ...    return rosenbrock(x)
+       ...
+       >>> problem = {'fitness_function': f,  # define problem arguments
+       ...            'ndim_problem': 20,
+       ...            'lower_boundary': -5.0*numpy.ones((20,)),
+       ...            'upper_boundary': 5.0*numpy.ones((20,))}
+       >>> options = {'max_function_evaluations': 50000,  # set optimizer options
+       ...            'seed_rng': 2023,  # seed for random number generation
+       ...            'n_islands': 4,  # number of parallel islands
+       ...            'island_runtime': 5.0}  # runtime of each island at each round
+       >>> dprs = DPRS(problem, options)  # initialize the optimizer class
+       >>> results = dprs.optimize()  # run the parallel optimization process
+       >>> print(f"DPRS: {results['n_function_evaluations']}, {results['best_so_far_y']}")
     """
     def __init__(self, problem, options):
         """Initialize the class with two inputs (problem arguments and optimizer options)."""
@@ -33,6 +77,7 @@ class DPRS(DO):
             ray_optimizers, ray_results = [], []  # to store all optimizers and their optimization results
             for i in range(self.n_islands):  # to run each island in parallel (driven by engine of ray)
                 options[i] = {'max_runtime': self.island_runtime,
+                    'max_function_evaluations': self.max_function_evaluations - self.n_function_evaluations,
                     'fitness_threshold': self.fitness_threshold,
                     'seed_rng': self.rng_optimization.integers(0, np.iinfo(np.int64).max),
                     'verbose': False,
