@@ -26,7 +26,7 @@ class DPRS(DO):
     def optimize(self, fitness_function=None, args=None):  # for all iterations (generations)
         """For the entire optimization/evolution stage: initialization + iteration."""
         fitness = DO.optimize(self, fitness_function)
-        ray_problem = ray.put(self.problem)  # to be shared across all nodes
+        ray_problem = ray.put(self.problem)  # to be shared for all islands across all nodes
         ray_base_optimizer = ray.remote(num_cpus=1)(self._optimizer)  # to be shared across all nodes
         options = [None]*self.n_islands  # for each island
         while not self._check_terminations():
