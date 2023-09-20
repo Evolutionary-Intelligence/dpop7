@@ -7,7 +7,7 @@ from dpop7.optimizers.core.distributed_optimizer import parallelize_evaluations 
 
 
 class DG3PCX(DGA):
-    """Distributed Generalized Generation Gap with Parent-Centric Recombination (G3PCX).
+    """Distributed Generalized Generation Gap with Parent-Centric Recombination (DG3PCX).
 
     .. note:: Originally `DG3PCX` was proposed to scale up the efficiency of `GA` mainly by
        Kalyanmoy Deb, `the recipient of IEEE Evolutionary Computation Pioneer Award 2018
