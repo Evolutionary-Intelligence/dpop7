@@ -79,6 +79,7 @@ class DCEP(DO):
                     'max_function_evaluations': self.island_max_fe,
                     'fitness_threshold': self.fitness_threshold,
                     'seed_rng': self.rng_optimization.integers(0, np.iinfo(np.int64).max),
+                    'sigma': np.mean((self.upper_boundary - self.lower_boundary)/3.0),
                     'verbose': False,
                     'saving_fitness': self.island_sf}
                 ray_optimizers.append(ray_base_optimizer.remote(ray_problem, options[i]))
