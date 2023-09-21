@@ -1,4 +1,5 @@
 import time
+
 import numpy as np  # engine for numerical computing
 
 # base class for Distributed Cross-Entropy Method and Ray-based parallel fitness evaluations
