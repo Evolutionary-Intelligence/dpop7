@@ -117,7 +117,7 @@ class DSNES(DNES):
             s[k] = self.rng_optimization.standard_normal((self.ndim_problem,))
             x[k] = mean + d*s[k]
         self.start_function_evaluations = time.time()
-        y = p_e(self.fitness_function, x, args)  # to evaluate these parallel points
+        y = np.array(p_e(self.fitness_function, x, args))  # to evaluate these parallel points
         self.time_function_evaluations += time.time() - self.start_function_evaluations
         self.n_function_evaluations += len(y)
         # update best-so-far solution and fitness
