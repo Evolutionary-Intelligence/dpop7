@@ -37,7 +37,7 @@ class DSNES(DO):
        >>> import ray  # engine for distributed computing
        >>> import numpy  # engine for numerical computing
        >>> from pypop7.benchmarks.base_functions import rosenbrock  # function to be minimized
-       >>> from pypop7.optimizers.island.dsnes import DSNES
+       >>> from dpop7.optimizers.island.dsnes import DSNES
        >>> problem = {'fitness_function': rosenbrock,  # define problem arguments
        ...            'ndim_problem': 20,
        ...            'lower_boundary': -5.0*numpy.ones((20,)),
