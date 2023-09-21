@@ -41,12 +41,13 @@ class DES(DO):
                 * 'max_runtime'              - maximal runtime to be allowed (`float`, default: `np.Inf`),
                 * 'seed_rng'                 - seed for random number generation needed to be *explicitly* set (`int`);
               and with the following particular settings (`keys`):
-                * 'mean' - initial (starting) point (`array_like`),
+                * 'n_parents' - number of parents/ancestors, aka parental population size (`int`),
+                * 'mean'      - initial (starting) point (`array_like`),
 
                   * if not given, it will draw a random sample from the uniform distribution whose search range is
                     bounded by `problem['lower_boundary']` and `problem['upper_boundary']`.
 
-                * 'sigma' - initial global step-size, aka mutation strength (`float`).
+                * 'sigma'     - initial global step-size, aka mutation strength (`float`).
 
     Attributes
     ----------
