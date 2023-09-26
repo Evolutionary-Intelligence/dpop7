@@ -10,3 +10,4 @@
 * Bubeck, S., Eldan, R. and Lee, Y.T., 2021. [Kernel-based methods for bandit convex optimization](https://dl.acm.org/doi/10.1145/3453721). Journal of the ACM, 68(4), pp.1-35.
 * Golovin, D., Karro, J., Kochanski, G., Lee, C., Song, X. and Zhang, Q., 2019, September. [Gradientless descent: High-dimensional zeroth-order optimization](https://openreview.net/forum?id=Skep6TVYDB). In International Conference on Learning Representations.
 * Bertsekas, D., 2019. [Reinforcement learning and optimal control](http://web.mit.edu/dimitrib/www/RLbook.html). Athena Scientific.
+* https://www.sciencedirect.com/science/article/pii/0005109863900189
