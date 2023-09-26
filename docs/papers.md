@@ -6,4 +6,4 @@
 * https://www.jmlr.org/papers/volume23/19-750/19-750.pdf
 * https://ieeexplore.ieee.org/document/9373352
 * https://dl.acm.org/doi/10.1145/3453721
-* https://openreview.net/forum?id=Skep6TVYDB
+* Golovin, D., Karro, J., Kochanski, G., Lee, C., Song, X. and Zhang, Q., 2019, September. [Gradientless descent: High-dimensional zeroth-order optimization](https://openreview.net/forum?id=Skep6TVYDB). In International Conference on Learning Representations.
