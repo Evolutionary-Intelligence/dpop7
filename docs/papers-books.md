@@ -1,6 +1,7 @@
 # A Paper/Book List to Keep Growing
 
 * Bolte, J., Miclo, L. and Villeneuve, S., 2023. [Swarm gradient dynamics for global optimization: The mean-field limit case](https://link.springer.com/article/10.1007/s10107-023-01988-8). Mathematical Programming, pp.1-41.
+* Mavridis, C.N. and Baras, J.S., 2023. [Annealing optimization for progressive learning with stochastic approximation](https://ieeexplore.ieee.org/abstract/document/10002308). IEEE Transactions on Automatic Control, 68(5), pp.2862-2874.
 * https://proceedings.mlr.press/v202/mhanna23a/mhanna23a.pdf
 * http://proceedings.mlr.press/v202/chen23ai/chen23ai.pdf
 * Hou, B., O’connor, J., Andreas, J., Chang, S. and Zhang, Y., 2023, July. [Promptboosting: Black-box text classification with ten forward passes](https://proceedings.mlr.press/v202/hou23b/hou23b.pdf). In International Conference on Machine Learning (pp. 13309-13324). PMLR.
