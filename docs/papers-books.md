@@ -14,5 +14,6 @@
 * Ruan, Y., Xiong, Y., Reddi, S., Kumar, S. and Hsieh, C.J., 2020, September. [Learning to learn by zeroth-order oracle](https://openreview.net/forum?id=ryxz8CVYDH). In International Conference on Learning Representations.
 * Golovin, D., Karro, J., Kochanski, G., Lee, C., Song, X. and Zhang, Q., 2019, September. [Gradientless descent: High-dimensional zeroth-order optimization](https://openreview.net/forum?id=Skep6TVYDB). In International Conference on Learning Representations.
 * Bertsekas, D., 2019. [Reinforcement learning and optimal control](http://web.mit.edu/dimitrib/www/RLbook.html). Athena Scientific.
+* Liu, S., Chen, P.Y., Chen, X. and Hong, M., 2019, September. [SignSGD via zeroth-order oracle](https://openreview.net/forum?id=BJe-DsC5Fm). In International Conference on Learning Representations.
 * Liu, S., Kailkhura, B., Chen, P.Y., Ting, P., Chang, S. and Amini, L., 2018. [Zeroth-order stochastic variance reduction for nonconvex optimization](https://proceedings.neurips.cc/paper/2018/file/ba9a56ce0a9bfa26e8ed9e10b2cc8f46-Paper.pdf). Advances in Neural Information Processing Systems.
 * Karnopp, D.C., 1963. [Random search techniques for optimization problems](https://www.sciencedirect.com/science/article/pii/0005109863900189). Automatica, 1(2-3), pp.111-121.
